@@ -88,6 +88,7 @@ export default function AllJobsTable({ className }: { className?: string }) {
             filters={filters}
             updateFilter={updateFilter}
             handleReset={handleReset}
+            setTitle={(title: string) => {}}
           />
           <Input
             className="w-full @[42rem]:w-auto @[70rem]:w-80"

@@ -5,17 +5,20 @@ import dynamic from 'next/dynamic';
 import isEmpty from 'lodash/isEmpty';
 import { Title, Loader } from 'rizzui';
 import cn from '@utils/class-names';
-import type { TableFilterProps } from '@/app/shared/controlled-table/table-filter';
+import { TableFilterProps } from '@/app/shared/controlled-table/table-filter';
 import type { TablePaginationProps } from '@/app/shared/controlled-table/table-pagination';
 import Table, { TableProps } from '../table';
-const TableFilter = dynamic(
-  () => import('@/app/shared/controlled-table/table-filter'),
-  { ssr: false }
-);
-const TablePagination = dynamic(
-  () => import('@/app/shared/controlled-table/table-pagination'),
-  { ssr: false }
-);
+// const TableFilter = dynamic(
+//   () => import('@/app/shared/controlled-table/table-filter'),
+//   { ssr: false }
+// );
+import TableFilter from '@/app/shared/controlled-table/table-filter';
+import TablePagination from '@/app/shared/controlled-table/table-pagination';
+
+// const TablePagination = dynamic(
+//   () => import('@/app/shared/controlled-table/table-pagination'),
+//   { ssr: false }
+// );
 
 type ControlledTableProps = {
   isLoading?: boolean;
