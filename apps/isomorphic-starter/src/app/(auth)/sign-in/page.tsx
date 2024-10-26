@@ -35,7 +35,7 @@ export default function SignIn() {
         <div className="relative w-full h-full">
           <Image
             src={
-              '/public/auth-login-illustration.png'
+              '/auth-login-illustration.png'
             }
             alt="Sign Up Thumbnail"
             fill
