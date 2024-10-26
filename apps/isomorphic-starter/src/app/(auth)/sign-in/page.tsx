@@ -4,6 +4,9 @@ import AuthWrapperOne from '@/app/shared/auth-layout/auth-wrapper-one';
 import UnderlineShape from '@components/shape/underline';
 import { metaObject } from '@/config/site.config';
 
+//Images
+
+
 import React from 'react';
 
 export const metadata = {
@@ -32,7 +35,7 @@ export default function SignIn() {
         <div className="relative w-full h-full">
           <Image
             src={
-              '/auth-login-illustration.png'
+              '/public/auth-login-illustration.png'
             }
             alt="Sign Up Thumbnail"
             fill
