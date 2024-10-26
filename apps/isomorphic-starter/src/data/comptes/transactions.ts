@@ -1,0 +1,36 @@
+export const transactionData = [
+    {
+      id: 174,
+      orderId: "1308242024163659",
+      libelle: "Test",
+      type: "envoi",
+      montant: "3587.50",
+      date: "2024-08-13 16:37:01",
+      destination: "+2250704009222",
+      provenance: "Compte principal",
+      statut: "Effectué",
+      nouveau_solde: "64940.00",
+      frais: "87.50",
+      client_id: 96,
+      operateur: "Orange",
+      created_at: "2024-08-13T18:37:01.000000Z",
+      updated_at: "2024-08-13T18:37:01.000000Z"
+  },
+  {
+      id: 173,
+      orderId: "1208242024162853",
+      libelle: "kk",
+      type: "envoi",
+      montant: "90.00",
+      date: "2024-08-12 16:28:53",
+      destination: "+2250704009222",
+      provenance: "Compte principal",
+      statut: "Effectué",
+      nouveau_solde: "68527.00",
+      frais: "20.00",
+      client_id: 96,
+      operateur: "Orange",
+      created_at: "2024-08-12T18:28:53.000000Z",
+      updated_at: "2024-08-12T18:28:53.000000Z"
+  },
+];
