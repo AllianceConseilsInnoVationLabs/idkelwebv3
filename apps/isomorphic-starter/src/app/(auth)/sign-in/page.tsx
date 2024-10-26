@@ -5,6 +5,7 @@ import UnderlineShape from '@components/shape/underline';
 import { metaObject } from '@/config/site.config';
 
 //Images
+import HeroImg from '@public/auth-login-illustration.png';
 
 
 import React from 'react';
@@ -34,10 +35,8 @@ export default function SignIn() {
         // <div className="relative mx-auto aspect-[4/3.37] w-[500px] xl:w-[620px] 2xl:w-[820px]">
         <div className="relative w-full h-full">
           <Image
-            src={
-              '/auth-login-illustration.png'
-            }
-            alt="Sign Up Thumbnail"
+            src={HeroImg}
+            alt="Idkel Hero Image"
             fill
             priority
             sizes="(max-width: 768px) 100vw"
