@@ -2,15 +2,37 @@
 
 import Link from 'next/link';
 import { PiArrowRightBold } from 'react-icons/pi';
-import { Checkbox, Password, Button, Input, Text } from 'rizzui';
+import { Checkbox, Password, Button, Input, Text, Loader } from 'rizzui';
 import { useFormState, useFormStatus } from 'react-dom'
 import { routes } from '@/config/routes';
 import { SignIn } from '@/actions/auth';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
+const SubmitButton = () => {
+  const { pending } = useFormStatus();
+  
+  return (
+      <Button
+          type="submit"
+          className="w-full"
+          aria-disabled={pending}
+          disabled={pending}
+          size="lg"
+      >
+          {pending ? 
+            <Loader variant="spinner" /> :  
+            <>
+              <span>Se connecter</span>{' '}
+              <PiArrowRightBold className="ms-2 mt-0.5 h-6 w-6" />
+            </>
+          }
+      </Button>
+  )
+}
+
 export default function SignInForm() {
-  const [state, action] = useFormState(SignIn, undefined);
+  const [formState, action] = useFormState(SignIn, undefined);
   const { pending } = useFormStatus();
 
   const [errors, setErrors] = useState({});
@@ -21,11 +43,15 @@ export default function SignInForm() {
     if(searchParams.get('logout')) {
       window.location.href = "/sign-in";
     }
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    console.log(formState);
+  }, [formState])
 
   return (
     <>
-      <form action={action} onSubmit={() => setLoading(true)}>
+      <form action={action}>
           <div className="space-y-5">
             <Input
               type="email"
@@ -35,7 +61,8 @@ export default function SignInForm() {
               className="[&>label>span]:font-medium"
               inputClassName="text-sm"
               name="email"
-              error={searchParams.get('invalid') && searchParams.get('invalid') === 'email' ? 'Veuillez saisir un email valide' : ''}
+              // error={searchParams.get('invalid') && searchParams.get('invalid') === 'email' ? 'Veuillez saisir un email valide' : ''}
+              error={Array.isArray(formState?.errors?.email) ? formState.errors.email.join(', ') : formState?.errors?.email}
             />
             <Password
               label="Mot de passe"
@@ -44,7 +71,8 @@ export default function SignInForm() {
               className="[&>label>span]:font-medium"
               inputClassName="text-sm"
               name="password"
-              error={searchParams.get('invalid') && searchParams.get('invalid') === 'password' ? 'Veuillez saisir un mot de passe valide' : ''}
+              // error={searchParams.get('invalid') && searchParams.get('invalid') === 'password' ? 'Veuillez saisir un mot de passe valide' : ''}
+              error={Array.isArray(formState?.errors?.password) ? formState.errors.password.join(', ') : formState?.errors?.password}
             />
             <div className="flex items-center justify-between pb-2">
               <Checkbox
@@ -61,17 +89,7 @@ export default function SignInForm() {
               </Link>
             </div>
 
-            <Button className="w-full" type="submit" size="lg">
-              {loading && <span className="loader"></span>}
-
-              {!loading && (
-                <>
-                  <span>Se connecter</span>{' '}
-                  <PiArrowRightBold className="ms-2 mt-0.5 h-6 w-6" />
-                </>
-              )}
-              
-            </Button>
+            <SubmitButton />
           </div>
         
       </form>

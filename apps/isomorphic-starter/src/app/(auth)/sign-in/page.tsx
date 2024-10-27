@@ -7,7 +7,6 @@ import { metaObject } from '@/config/site.config';
 //Images
 import HeroImg from '@public/auth-login-illustration.png';
 
-
 import React from 'react';
 
 export const metadata = {

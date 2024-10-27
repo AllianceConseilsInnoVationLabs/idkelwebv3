@@ -13,8 +13,6 @@ export async function SignIn(state: LoginFormState, formData: FormData) {
         email: formData.get('email'),
         password: formData.get('password'),
     });
-
-    console.log(formData.get('rememberme'));
      
     // If any form fields are invalid, return early
     if (!validatedFields.success) {
@@ -43,10 +41,10 @@ export async function SignIn(state: LoginFormState, formData: FormData) {
         redirect('/');
     }else{
         if(data.error_email)
-            redirect('/sign-in?invalid=email');
+            return {errors: {email: ['Email incorrect']}};
 
         if(data.error_password)
-            redirect('/sign-in?invalid=password');
+            return {errors: {password: ['Mot de passe incorrect']}};
     }
 }
 
