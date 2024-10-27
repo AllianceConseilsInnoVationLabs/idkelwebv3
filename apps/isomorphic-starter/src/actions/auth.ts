@@ -5,6 +5,7 @@ import { LoginFormState } from '@/lib/form-definitions';
 import { createSession, deleteSession, storeToSession } from '@/lib/session';
 
 import { redirect } from 'next/navigation';
+import { routes } from '@/config/routes-idkel';
 
 const apibase = process.env.API_BASE_URL;
 
@@ -38,7 +39,8 @@ export async function SignIn(state: LoginFormState, formData: FormData) {
         await createSession(data.user, formData.get('rememberme') === 'on');
         await storeToSession('client', data.belongs[0]?.client);
 
-        redirect('/');
+        // redirect('/');
+        redirect(routes.tresorerie.dashboard);
     }else{
         if(data.error_email)
             return {errors: {email: ['Email incorrect']}};
