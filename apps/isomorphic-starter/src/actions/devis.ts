@@ -92,8 +92,6 @@ export async function withdrawDevis(params: any[], state: WithdrawDevisForm, for
         checkdate: checkdate && checkdate.toISOString(),
     }
 
-    console.log(fields);
-
     let validatedFields: any = {};
     validatedFields = withdrawDevisSchema.safeParse(fields);
     console.log(validatedFields?.error?.flatten().fieldErrors);
