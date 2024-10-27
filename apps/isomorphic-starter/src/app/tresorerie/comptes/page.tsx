@@ -108,12 +108,12 @@ export default function TresorerieComptes() {
             attending: 0,
             actions: (<>
                 <Tooltip size="sm" placement="bottom" content={"Approvisionner le compte"}>
-                    <Button className="w-3/4 rounded-xl flex gap-x-2 justify-center bg-idkel-blueother hover:bg-primary" color="secondary">
+                    <Button className="w-3/4 rounded-xl flex gap-x-2 justify-center bg-idkel-blueother hover:bg-primary text-white" color="secondary">
                         <CreditCard width={20} height={20} /> Recharger
                     </Button>
                 </Tooltip>
                 <Tooltip size="sm" placement="bottom" content={"Voir la progression"}>
-                    <Button onClick={() => handleProgression(0)} className="w-1/4 rounded-xl flex gap-x-4 justify-center bg-idkel-red hover:bg-primary" color="secondary">
+                    <Button onClick={() => handleProgression(0)} className="w-1/4 rounded-xl flex gap-x-4 justify-center bg-idkel-red hover:bg-primary text-white" color="secondary">
                         <ChartNoAxesCombined width={20} height={20} />
                     </Button>
                 </Tooltip>
@@ -126,12 +126,12 @@ export default function TresorerieComptes() {
             attending: 0,
             actions: (<>
                 <Tooltip size="sm" placement="bottom" content={"Afficher les sous comptes"}>
-                    <Button className="w-full rounded-xl flex gap-x-2 justify-center bg-idkel-blueother hover:bg-primary" onClick={() => toggleSubAccount('Caisse') } color="secondary">
+                    <Button className="w-full rounded-xl flex gap-x-2 justify-center bg-idkel-blueother hover:bg-primary text-white" onClick={() => toggleSubAccount('Caisse') } color="secondary">
                         <Logs width={20} height={20} /> Sous comptes ({subAccounts.caisses.length})
                     </Button>
                 </Tooltip>
                 <Tooltip size="sm" placement="bottom" content={"Voir la progression"}>
-                    <Button onClick={() => handleProgression(1)} className="w-1/4 rounded-xl flex gap-x-4 justify-center bg-idkel-red hover:bg-primary" color="secondary">
+                    <Button onClick={() => handleProgression(1)} className="w-1/4 rounded-xl flex gap-x-4 justify-center bg-idkel-red hover:bg-primary text-white" color="secondary">
                         <ChartNoAxesCombined width={20} height={20} />
                     </Button>
                 </Tooltip>
@@ -144,12 +144,12 @@ export default function TresorerieComptes() {
             attending: 0,
             actions: (<>
                 <Tooltip size="sm" placement="bottom" content={"Afficher les sous comptes"}>
-                    <Button className="w-full rounded-xl flex gap-x-2 justify-center bg-idkel-blueother hover:bg-primary" onClick={() => toggleSubAccount('Banque')} color="secondary">
+                    <Button className="w-full rounded-xl flex gap-x-2 justify-center bg-idkel-blueother hover:bg-primary text-white" onClick={() => toggleSubAccount('Banque')} color="secondary">
                         <Logs width={20} height={20} /> Sous comptes ({subAccounts.banques.length})
                     </Button>
                 </Tooltip>
                 <Tooltip size="sm" placement="bottom" content={"Voir la progression"}>
-                    <Button onClick={() => handleProgression(2)} className="w-1/4 rounded-xl flex gap-x-4 justify-center bg-idkel-red hover:bg-primary" color="secondary">
+                    <Button onClick={() => handleProgression(2)} className="w-1/4 rounded-xl flex gap-x-4 justify-center bg-idkel-red hover:bg-primary text-white" color="secondary">
                         <ChartNoAxesCombined width={20} height={20} />
                     </Button>
                 </Tooltip>
@@ -161,11 +161,11 @@ export default function TresorerieComptes() {
             solde: ecoSolde,
             attending: 0,
             actions: (<>
-                <Button className="w-full rounded-xl flex gap-x-2 justify-center bg-idkel-blueother hover:bg-primary" color="secondary">
+                <Button className="w-full rounded-xl flex gap-x-2 justify-center bg-idkel-blueother hover:bg-primary text-white" color="secondary">
                     <HandCoins width={20} height={20} /> {`J'économise`}
                 </Button>
                 <Tooltip size="sm" placement="bottom" content={"Voir la progression"}>
-                    <Button onClick={() => handleProgression(3)} className="w-1/4 rounded-xl flex gap-x-4 justify-center bg-idkel-red hover:bg-primary" color="secondary">
+                    <Button onClick={() => handleProgression(3)} className="w-1/4 rounded-xl flex gap-x-4 justify-center bg-idkel-red hover:bg-primary text-white" color="secondary">
                         <ChartNoAxesCombined width={20} height={20} />
                     </Button>
                 </Tooltip>

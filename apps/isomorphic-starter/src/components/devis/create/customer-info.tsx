@@ -1,7 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import { Controller, useFormContext } from 'react-hook-form';
-import { DatePicker } from '@ui/datepicker';
 import PencilIcon from '@components/icons/pencil';
 import { Text, Title, Select, ActionIcon, Input, Button, Avatar, Loader } from 'rizzui';
 import cn from '@utils/class-names';
@@ -16,6 +13,7 @@ import { PlusIcon } from '@radix-ui/react-icons';
 import { useFormState, useFormStatus } from 'react-dom';
 import { createDevis } from '@/actions/devis';
 import { useToast } from '@/hooks/use-toast';
+import { useRouter } from 'next/navigation';
 
 interface ICustomerInfoProps {
   className?: string;
@@ -52,6 +50,7 @@ export default function CustomerInfo({
   const [isNewCustomerOpen, setIsNewCustomerOpen] = useState(false);
   const [canSubmit, setCanSubmit] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
+  const router = useRouter();
 
   const createDevisWithParams = createDevis.bind(null, [items, customerId, emissionDate, echeanceDate, {
     ht: totalHT,
@@ -100,6 +99,7 @@ export default function CustomerInfo({
         toast({
             title: "Devis créé",
             description: "Vous avez créé un nouveau devis avec succès",
+            className: 'bg-green-500 text-white',
         });
 
         setItems([]);
@@ -107,6 +107,8 @@ export default function CustomerInfo({
         setEcheanceDate(null);
         setEmissionDate(null);
         setPaymentMethod('Cash');
+        
+        router.push(routes.tresorerie.devis.index);
       }else if(formState?.success === false) {
         toast({
           variant: "destructive",

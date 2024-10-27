@@ -45,6 +45,7 @@ export default function NewCustomerModal({ isOpen, setOpen, customers, setCustom
             toast({
                 title: "Client créé",
                 description: "Vous avez créé un nouveau client avec succès",
+                className: "bg-green-500 text-white",
             });
 
             setCustomers([...customers, formState.customer]);

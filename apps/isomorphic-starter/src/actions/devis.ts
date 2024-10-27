@@ -64,19 +64,15 @@ export async function createDevis(params: any[], state: CreateDevisForm, formDat
     );
 
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
 
-    if(!data.success) {
-        return data;
-    }
-
-    redirect(routes.tresorerie.devis.index);
+    return data;
 }
 
 export async function deleteDevis(id:number) {
     const response = await fetch(`${apibase}/client/devis/delete/${id}`);
     const data = await response.json();
-    console.log(data);
+    // console.log(data);
 
     if(!data.success) {
         return data;

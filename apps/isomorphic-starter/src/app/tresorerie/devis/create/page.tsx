@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTitle } from '@/context/pageTitleContext';
 import { routes } from "@/config/routes-idkel";
-import { FactureItem, FactureItemMagasin, FactureItemService } from '@/lib/definitions';
-import { DevisItems } from '@/data/factures/factures';
+import { FactureItemMagasin, FactureItemService } from '@/lib/definitions';
 import {  Button, Empty, EmptyProductBoxIcon } from 'rizzui';
 import CustomerInfo from '@/components/devis/create/customer-info';
 import { Plus, Save } from 'lucide-react';

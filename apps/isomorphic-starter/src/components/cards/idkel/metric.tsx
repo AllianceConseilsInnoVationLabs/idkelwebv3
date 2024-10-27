@@ -14,7 +14,7 @@ const IdkelMetricCard = ({
                 {icon}
             </div>
             <p className="font-light text-black mt-4">{title}</p>
-            <h3 className="text-[20px] font-normal">{ formatMillier(metric) } F</h3>
+            <h3 className="text-[18px] font-normal">{ formatMillier(metric) }</h3>
         </div>
     );
 }

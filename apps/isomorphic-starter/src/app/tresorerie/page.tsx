@@ -182,7 +182,8 @@ const Page = () => {
             </SectionBlock>
             
             <SectionBlock>
-                <ProfitChart className="col-span-full @3xl:col-span-full @[1429px]:col-span-8 bg-idkel-gray border-none rounded-2xl" />
+                <TurnoverHistory title="Evolution de la trésorerie" amount={7219056} className="w-full bg-idkel-gray border-none rounded-2xl" />
+                {/* <ProfitChart className="col-span-full @3xl:col-span-full @[1429px]:col-span-8 bg-idkel-gray border-none rounded-2xl" /> */}
             </SectionBlock>
         </div>
     );

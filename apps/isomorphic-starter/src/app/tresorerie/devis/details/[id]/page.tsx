@@ -3,14 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import { useTitle } from '@/context/pageTitleContext';
 import { routes } from "@/config/routes-idkel";
-import { FactureItem, FactureItemMagasin, FactureItemService } from '@/lib/definitions';
-import { DevisItems } from '@/data/factures/factures';
-import {  Button, Empty, EmptyProductBoxIcon } from 'rizzui';
+import {  Loader } from 'rizzui';
 import CustomerInfo from '@/components/devis/details/customer-info';
-import { Plus, Save } from 'lucide-react';
-import NewDevisItem from '@/components/modals/newDevisItem';
 import Item from '@/components/devis/details/item';
-import SelectDevisCustomer from '@/components/modals/SelectDevisCustomer';
 import { formatMillier } from '@/lib/utils';
 
 const breadcrumb = [
@@ -37,6 +32,7 @@ export default function DevisDetails({ params }: { params: { id: string } }) {
     const [items, setItems] = useState<any[]>([]);
     const [customer, setCustomer] = useState<any | null>(null);
     const [facture, setFacture] = useState<any | null>(null);
+    const [loading, setLoading] = useState(true);
 
     let htreducer = (acc:number, current:any) => acc + current.pu * current.qte;
     let remisereducer = (acc:number, current:any) => {
@@ -51,19 +47,16 @@ export default function DevisDetails({ params }: { params: { id: string } }) {
         return acc;
     };
 
-    const totalHt = items.reduce(htreducer, 0);
-    const totalRemise = items.reduce(remisereducer, 0);
-
     useEffect(() => {
         (async () => {
             const datas = await fetch('/api/tresorerie/devis-factures/details?id=' + params.id, {
                 method: 'GET'
             }).then((res) => res.json());
 
-            console.log(datas);
             setFacture(datas.facture);
             setItems(datas.items);
             setCustomer(datas.customer);
+            setLoading(false);
         })();
     }, []);
 
@@ -72,7 +65,10 @@ export default function DevisDetails({ params }: { params: { id: string } }) {
     setBreadcrumb(breadcrumb);
 
     return (
-        <div>
+        <div className={`w-full ${loading ? 'flex justify-center h-[80vh]' : ''}`}>
+            {loading && <Loader variant='spinner' size="xl" />}
+            
+            {!loading && (
             <div  className={'isomorphic-form flex flex-grow flex-col @container [&_label.block>span]:font-medium'}>
                 <div className="items-start @5xl:grid @5xl:grid-cols-12 @5xl:gap-7 @6xl:grid-cols-10 @7xl:gap-10">
                     <div className="flex-grow @5xl:col-span-8 @5xl:pb-10 @6xl:col-span-7 pt-10">
@@ -119,6 +115,7 @@ export default function DevisDetails({ params }: { params: { id: string } }) {
                     </div>
                 </div>
             </div>
+            )}
         </div>
     )
 };

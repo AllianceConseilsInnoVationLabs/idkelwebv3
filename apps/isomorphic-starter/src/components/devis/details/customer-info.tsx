@@ -52,32 +52,29 @@ export default function CustomerInfo({
         <div className="relative border-b border-gray-300 pb-7">
           <Title as="h6" className="mb-6">Client</Title>
 
-          {!customer && <Loader variant='spinner' />}
           {customer && (
-          <div className="flex items-center">
-            <Avatar
-              name={customer.nom_client+" "+(customer.prenom_client ?? '')}
-              initials={getInitials(customer.nom_client+" "+(customer.prenom_client ?? ''))}
-              size="xl"
-              color="primary"
-            />
-            <div className="ps-4 @5xl:ps-6">
-              <Title as="h6" className=" font-semibold">
-                {customer.nom_client+" "+(customer.prenom_client ?? '')}
-              </Title>
-              <Text as="p" className=" break-all last:mb-0">
-                {customer.email_client ?? "Pas d'email"}
-              </Text>
-              <Text as="p" className=" last:mb-0">
-                {formatTel(customer.tel_client ?? 'Pas de contact')}
-              </Text>
+            <div className="flex items-center">
+              <Avatar
+                name={customer.nom_client+" "+(customer.prenom_client ?? '')}
+                initials={getInitials(customer.nom_client+" "+(customer.prenom_client ?? ''))}
+                size="xl"
+                color="primary"
+              />
+              <div className="ps-4 @5xl:ps-6">
+                <Title as="h6" className=" font-semibold">
+                  {customer.nom_client+" "+(customer.prenom_client ?? '')}
+                </Title>
+                <Text as="p" className=" break-all last:mb-0">
+                  {customer.email_client ?? "Pas d'email"}
+                </Text>
+                <Text as="p" className=" last:mb-0">
+                  {formatTel(customer.tel_client ?? 'Pas de contact')}
+                </Text>
+              </div>
             </div>
-          </div>
-          )}
-            
+          )}    
         </div>
         
-        {!facture && <Loader variant='spinner' />}
         {facture && (
         <>
           <div className="space-y-2 @lg:space-y-2s @2xl:space-y-2 mt-4 border-b border-gray-300 pb-7">

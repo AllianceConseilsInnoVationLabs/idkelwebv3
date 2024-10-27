@@ -8,6 +8,7 @@ const apibase = process.env.API_BASE_URL;
 
 export async function newSubAccount(state: NewSubAccountForm, formData: FormData) {
     let validatedFields: any = {};
+    console.log(formData.get('compte_type'));
     
     if(formData.get('compte_type') === 'Banque') {
         validatedFields = newSubAccountSchema.safeParse({
@@ -58,7 +59,6 @@ export async function newSubAccount(state: NewSubAccountForm, formData: FormData
 
     const allcomptes = await fetch(`${apibase}/client/listeComptes/${client.id}`)
         .then((res) => res.json());
-
     const caisses = allcomptes.filter((a: any) => a.compte_type === 'Caisse');
     const banques = allcomptes.filter((a: any) => a.compte_type === 'Banque');
 

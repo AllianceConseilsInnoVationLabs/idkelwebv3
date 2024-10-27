@@ -5,6 +5,7 @@ import { useTitle } from '@/context/pageTitleContext';
 import { routes } from "@/config/routes-idkel";
 import { Facture } from '@/lib/definitions';
 import Devis from '@/components/tables/devis/devis';
+import { Loader } from 'rizzui';
 
 const breadcrumb = [
     {
@@ -24,6 +25,7 @@ const breadcrumb = [
 export default function DevisFactures() {
     const { setTitle, setBreadcrumb } = useTitle();
     const [items, setItems] = useState<Facture[]>([]);
+    const [loading, setLoading] = useState(true);
 
     setTitle('Devis & Factures');
     setBreadcrumb(breadcrumb);
@@ -34,6 +36,7 @@ export default function DevisFactures() {
         }).then((res) => res.json());
         
         setItems(datas.items);
+        setLoading(false);
     }
 
     useEffect(() => {
@@ -43,7 +46,8 @@ export default function DevisFactures() {
     
 
     return (
-        <div>
+        <div className={`w-full ${loading ? 'flex justify-center h-[80vh]' : ''}`}>
+            {loading && <Loader variant='spinner' size="xl" />}
             {items.length > 0 && <Devis 
                 className="w-full rounded-2xl border-none bg-idkel-gray" 
                 datas={items}

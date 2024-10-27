@@ -80,7 +80,7 @@ const viewOptions = [
   },
 ];
 
-export default function TurnoverHistory({ className }: { className?: string }) {
+export default function TurnoverHistory({ className, title = "Chiffre d'affaires", amount=29765934 }: { className?: string, title?: string, amount?: number }) {
   const isTablet = useMedia('(max-width: 820px)', false);
   function handleChange(viewType: string) {
     console.log('viewType', viewType);
@@ -88,7 +88,7 @@ export default function TurnoverHistory({ className }: { className?: string }) {
 
   return (
     <WidgetCard
-      title="Chiffre d'affaires"
+      title={title}
       titleClassName="text-gray-700 font-normal sm:text-sm font-inter"
       headerClassName="items-center"
       className={cn('min-h-[28rem]', className)}

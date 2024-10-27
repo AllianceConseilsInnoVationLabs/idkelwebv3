@@ -202,7 +202,7 @@ export const getColumns = ({
           </Button>
 
           <Tooltip size="sm" placement="top" content={"Afficher les détails"} color="invert">
-            <Button size="sm" rounded="pill" color="secondary">
+            <Button size="sm" rounded="pill" color="secondary" className="hover:bg-gray-300 hover:text-primary">
               <Link href={'/tresorerie/devis/details/'+row.id}>
                 <Eye size={16}/>
               </Link>
@@ -224,7 +224,7 @@ export const getColumns = ({
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Annuler</AlertDialogCancel>
-                <AlertDialogAction onClick={() => {onDeleteItem(row.id)}}>
+                <AlertDialogAction onClick={() => {onDeleteItem(row.id)}} className="hover:text-primary">
                   Supprimer
                 </AlertDialogAction>
               </AlertDialogFooter>
