@@ -9,9 +9,15 @@ export async function GET() {
     
     const DevisFactures = await fetch(`${apibase}/client/factures/${client.id}`)
         .then((res) => res.json());
+
+    const SubAccounts = await fetch(`${apibase}/client/listeComptes/${client.id}`)
+        .then((res) => res.json());
+
+    console.log(SubAccounts);
     
     const datas = { 
-        items: DevisFactures
+        items: DevisFactures,
+        subaccounts: SubAccounts
     };
 
     return Response.json(datas);

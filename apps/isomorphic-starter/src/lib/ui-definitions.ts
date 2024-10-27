@@ -74,3 +74,10 @@ export interface INewCustomerProps extends IModalProps {
     setCustomers: React.Dispatch<React.SetStateAction<any[]>>,
     setCustomerId: React.Dispatch<React.SetStateAction<number | null>>,
 }
+
+export interface INewWithdrawProps extends IModalProps {
+    subAccounts: any[],
+    devis: any | null,
+    setDevis: React.Dispatch<React.SetStateAction<any | null>>,
+    refreshData: () => void
+}

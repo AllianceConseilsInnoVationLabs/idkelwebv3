@@ -52,3 +52,15 @@ export type CreateDevisForm =
         message?: string
     }
     | undefined
+    
+export type WithdrawDevisForm = 
+    | {
+        errors?: {
+            devis_id?: string[],
+            montant?: string[],
+            checkdate?: string[],
+            compte?: string[],
+        },
+        message?: string
+    }
+    | undefined

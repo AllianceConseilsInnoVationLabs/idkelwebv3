@@ -1592,3 +1592,7 @@ button .loader{
   --tw-ring-color: rgb(var(--red-default) / var(--tw-ring-opacity));
   border-color: rgb(var(--red-default) / var(--tw-border-opacity));
 }
+
+.withdraw-modal [id^="headlessui-dialog-panel"]{
+  overflow: visible !important;
+}

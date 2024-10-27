@@ -1,15 +1,15 @@
 import React from 'react';
 import DatePicker from '@/components/datepicker';
 
-const DatePickerWithLabel = ({ label, placeholder, value, setValue, error }: any) => {
+const DatePickerWithLabel = ({ label, placeholder, value, setValue, error, className }: any) => {
     return (
-        <div className="flex flex-col">
+        <div className={`flex flex-col ${className}`}>
             <p className="mb-1.5">{label}</p>
             <DatePicker
                 selected={value} 
                 onChange={(date: Date) => setValue(date)}
                 placeholderText={placeholder}
-                className={`${error && 'datepicker-error'}`}
+                className={`${error && 'datepicker-error'} `}
             />
 
             {error && (
