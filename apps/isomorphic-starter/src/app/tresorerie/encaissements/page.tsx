@@ -23,7 +23,7 @@ const breadcrumb = [
 ];
 
 
-export default function DevisFactures() {
+export default function EncaissementsPage() {
     const { setTitle, setBreadcrumb } = useTitle();
     const [items, setItems] = useState<Facture[]>([]);
 
