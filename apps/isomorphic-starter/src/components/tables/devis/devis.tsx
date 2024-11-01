@@ -158,7 +158,7 @@ export default function Devis({ className, datas, withdrawOpen, refreshData, set
             handleReset={handleReset}
             setTitle={setTitle}
           />
-          <div className="">
+          {/* <div className="">
             <DatePicker
               className="min-w-[300px] bg-white"
               selected={startRangeDate}
@@ -176,7 +176,7 @@ export default function Devis({ className, datas, withdrawOpen, refreshData, set
                 },
               }}
             />
-          </div>
+          </div> */}
           <Input
             className="w-full @[42rem]:w-auto @[70rem]:w-80 bg-white"
             type="search"

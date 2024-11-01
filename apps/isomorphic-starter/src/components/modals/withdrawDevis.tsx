@@ -117,7 +117,7 @@ export default function NewWithdrawModal({ isOpen, setOpen, subAccounts, devis, 
                         />
 
                         <Select
-                            label={"Vous voulez prendre ce montant depuis quel type de compte? *"}
+                            label={"Vous voulez encaisser ce montant sur quel type de compte? *"}
                             placeholder={"Sélectionner..."}
                             options={CompteTypes}
                             value={typeValue}
