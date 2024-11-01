@@ -19,7 +19,7 @@ const breadcrumb = [
     },
     {
         name: 'Devis & Factures',
-        href: routes.tresorerie.devis,
+        href: routes.tresorerie.devis.index,
     },
     {
         name: 'Détails',
