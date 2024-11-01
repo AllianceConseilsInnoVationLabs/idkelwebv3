@@ -35,9 +35,12 @@ type Columns = {
   sortConfig?: any;
   handleSelectAll: any;
   checkedItems: string[];
+
+  onWithdrawDevis: (id: string | number) => void;
   onDeleteItem: (id: string) => void;
   onHeaderCellClick: (value: string) => void;
-  onChecked?: (id: string) => void;
+  editFacture: (id: string | number) => void;
+  onChecked?: (row: any) => void;
 };
 
 export const getColumns = ({
@@ -48,6 +51,8 @@ export const getColumns = ({
   onDeleteItem,
   handleSelectAll,
   onHeaderCellClick,
+  editFacture,
+  onWithdrawDevis,
 }: Columns) => [
   
   // {
@@ -192,12 +197,31 @@ export const getColumns = ({
       return (
         <div className="flex justify-end gap-x-2">
           {row.etat ===  "devis" && (
-            <Button variant="outline" size="sm" rounded="pill" color="primary">
-              Éditer facture
-            </Button>
+            <AlertDialog>
+              <AlertDialogTrigger>
+                <Button variant="outline" size="sm" rounded="pill" color="primary">
+                  Éditer facture
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Transformer le devis en facture?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Vous êtes sur le point de transformer votre devis en facture. Confirmez-vous cette action ?
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Annuler</AlertDialogCancel>
+                  <AlertDialogAction onClick={() => { editFacture(row?.id) }} className="hover:text-primary">
+                    Valider
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+            
           )}
 
-          <Button variant="flat" size="sm" rounded="pill">
+          <Button variant="flat" size="sm" rounded="pill" onClick={() => { onWithdrawDevis(row)  }}>
             Encaisser
           </Button>
 

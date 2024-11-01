@@ -15,15 +15,29 @@ import DatePicker from '@/components/datepicker';
 import { Facture } from '@/lib/definitions';
 import Link from 'next/link';
 import { routes } from '@/config/routes-idkel';
-import { deleteDevis } from '@/actions/devis';
+import { updateDevis, deleteDevis } from '@/actions/devis';
+import { useToast } from '@/hooks/use-toast';
+import { format } from 'date-fns';
 
 const filterState = {
   date: [null, null],
   status: '',
   etat: 'devis',
 };
-export default function Devis({ className, datas, refreshData }: { className?: string, datas: Facture[], refreshData: () => void }) {
+
+interface IDevisProps {
+  className?: string, 
+  datas: Facture[], 
+  withdrawOpen: boolean,
+  withdrawDevis: any | null,
+
+  refreshData: () => void,
+  setWithdrawOpen: (value: boolean) => void
+  setWithdrawDevis: (value: any | null) => void
+}
+export default function Devis({ className, datas, withdrawOpen, refreshData, setWithdrawOpen, withdrawDevis, setWithdrawDevis }: IDevisProps) {
   const [pageSize, setPageSize] = useState(7);
+  const { toast } = useToast();
 
   const onHeaderCellClick = (value: string) => ({
     onClick: () => {
@@ -31,12 +45,47 @@ export default function Devis({ className, datas, refreshData }: { className?: s
     },
   });
 
+  const editFacture = async (id: string | number) => {
+    const data = await updateDevis(Number(id), {
+      etat: 'facture',
+      date_facture: format(new Date(), 'yyyy-MM-dd'),
+    });
+
+    if(data.success) {
+      toast({
+        title: "Facture éditée",
+        description: "Vous avez transformé un devis en facture avec succès",
+        className: 'bg-green-500 text-white',
+      });
+
+      refreshData();
+    }else{
+      toast({
+        title: "Erreur",
+        description: data.message,
+        variant: 'destructive',
+      });
+    }
+  };
+
   const onDeleteItem = useCallback((id: string) => {
     deleteDevis(Number(id));
     handleDelete(id);
+
+    toast({
+      title: "Devis supprimé",
+      description: "Vous avez supprimé un devis avec succès",
+      className: 'bg-green-500 text-white',
+    });
+
     refreshData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const onWithdrawDevis =  (row: any) => {
+    setWithdrawOpen(true);
+    setWithdrawDevis(row);
+  }
 
   const {
     isLoading,
@@ -68,6 +117,8 @@ export default function Devis({ className, datas, refreshData }: { className?: s
         onDeleteItem,
         onChecked: handleRowSelect,
         handleSelectAll,
+        editFacture,
+        onWithdrawDevis
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [
@@ -107,7 +158,7 @@ export default function Devis({ className, datas, refreshData }: { className?: s
             handleReset={handleReset}
             setTitle={setTitle}
           />
-          <div className="">
+          {/* <div className="">
             <DatePicker
               className="min-w-[300px] bg-white"
               selected={startRangeDate}
@@ -125,7 +176,7 @@ export default function Devis({ className, datas, refreshData }: { className?: s
                 },
               }}
             />
-          </div>
+          </div> */}
           <Input
             className="w-full @[42rem]:w-auto @[70rem]:w-80 bg-white"
             type="search"
