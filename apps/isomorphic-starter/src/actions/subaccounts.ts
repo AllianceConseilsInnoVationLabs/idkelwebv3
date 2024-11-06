@@ -8,7 +8,6 @@ const apibase = process.env.API_BASE_URL;
 
 export async function newSubAccount(state: NewSubAccountForm, formData: FormData) {
     let validatedFields: any = {};
-    console.log(formData.get('compte_type'));
     
     if(formData.get('compte_type') === 'Banque') {
         validatedFields = newSubAccountSchema.safeParse({
@@ -24,9 +23,6 @@ export async function newSubAccount(state: NewSubAccountForm, formData: FormData
             compte_type: formData.get('compte_type') as string,
         });
     }
-    
-    console.log(formData.get('libelle'));
-    console.log(validatedFields?.error?.flatten().fieldErrors);
 
     // If any form fields are invalid, return early
     if (!validatedFields.success) {
@@ -69,8 +65,6 @@ export async function newSubAccount(state: NewSubAccountForm, formData: FormData
 }
 
 export async function provisionSubAccount(state: ProvisionSubAccountForm, formData: FormData) {
-    console.log(formData.get('compte'), ' vers ', formData.get('receiver'));
-
     const validatedFields = provisionSubAccountSchema.safeParse({
         montant: parseInt(formData.get('montant') as string),
         compte: parseInt(formData.get('compte') as string),
@@ -101,7 +95,6 @@ export async function provisionSubAccount(state: ProvisionSubAccountForm, formDa
     );
 
     const data = await response.json();
-    console.log(data);
 
     if(!data.success) {
         return data;

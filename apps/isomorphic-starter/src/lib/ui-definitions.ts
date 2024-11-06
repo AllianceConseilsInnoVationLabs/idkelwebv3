@@ -1,4 +1,5 @@
-import { FactureItemMagasin, FactureItemService } from "./definitions";
+import { SelectOption } from "rizzui";
+import { EncaissementHistoryItem, FactureItemMagasin, FactureItemService } from "./definitions";
 
 export interface ISectionProps {
     title?: string;
@@ -43,23 +44,33 @@ export interface INewSubAccountProps {
 }
 
 export interface ICreateItemProps {
-    setButton: React.Dispatch<React.SetStateAction<boolean>>;
+    setButton?: React.Dispatch<React.SetStateAction<boolean>>;
     className?: string;
-    newItem: any;
-    setNewItem: React.Dispatch<React.SetStateAction<any>>;
+    newItem?: any;
+    setNewItem?: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export interface ICreateItemServiceProps extends ICreateItemProps {
     services: FactureItemService[];
+    setServiceOrStockGood?: React.Dispatch<React.SetStateAction<boolean>>;
+    service?: SelectOption | null,
+    setService?: React.Dispatch<React.SetStateAction<SelectOption | null>>;
 }
 
 export interface ICreateItemMaterielProps extends ICreateItemProps {
     magasins: FactureItemMagasin[];
+    setServiceOrStockGood?: React.Dispatch<React.SetStateAction<boolean>>;
+    magasin?: SelectOption | null,
+    setMagasin?: React.Dispatch<React.SetStateAction<SelectOption | null>>;
+    stock?: SelectOption | null,
+    setStock?: React.Dispatch<React.SetStateAction<SelectOption | null>>;
+    state?: any;
 }
 
 export interface IModalProps {
     isOpen: boolean,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    title?: string,
 }
 
 export interface INewDevisItemProps extends IModalProps {
@@ -80,4 +91,24 @@ export interface INewWithdrawProps extends IModalProps {
     devis: any | null,
     setDevis: React.Dispatch<React.SetStateAction<any | null>>,
     refreshData: () => void
+}
+
+export interface INewOperationProps extends IModalProps {
+    operation: string,
+    services: FactureItemService[],
+    magasins: FactureItemMagasin[],
+    customers: any[],
+    produits: any[],
+    subAccounts: any[],
+    tvas: any[],
+    regime: string,
+    refreshData: () => void
+}
+
+export interface IHistoryOperationProps extends IModalProps {
+    accounts: any[],
+    historyData: EncaissementHistoryItem[],
+    
+    loading: boolean,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
 }

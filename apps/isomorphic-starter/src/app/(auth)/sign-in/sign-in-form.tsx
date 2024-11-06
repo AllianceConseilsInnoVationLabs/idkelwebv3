@@ -45,10 +45,6 @@ export default function SignInForm() {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(formState);
-  }, [formState])
-
   return (
     <>
       <form action={action}>

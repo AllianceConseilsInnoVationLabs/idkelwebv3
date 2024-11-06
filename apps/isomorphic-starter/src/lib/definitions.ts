@@ -140,6 +140,8 @@ export type FactureItemStock = {
     magasin_id: number,
     created_at: string,
     updated_at: string
+
+    produit?: FactureItemProduit
 }
 
 export type FactureItem = {
@@ -235,4 +237,21 @@ export type Facture = {
 export type MouvementTransaction =  FactureMouvement & {
     service?: null | FactureItemService,
     customer?: null |  FactureCustomer,
+}
+
+export type EncaissementHistoryItem = {
+    id: number,
+    libelle: string,
+    date: string,
+    montant: string,
+    nouveau_solde_compte: string,
+    solde_global_caisse: string,
+    reste_a_payer: string | number | null,
+    solde_global_banque: string | number | null,
+    mouvement_id: number,
+    compte_id: number | null,
+    type_compte: string | null,
+    created_at: string,
+    updated_at: string,
+    paiement_id: string | null,
 }

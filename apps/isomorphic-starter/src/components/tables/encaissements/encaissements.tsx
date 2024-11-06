@@ -12,17 +12,35 @@ import { getColumns } from './columns';
 import FilterElement from './filter-element';
 import DatePicker from '@/components/datepicker';
 
-import { Facture } from '@/lib/definitions';
+import { EncaissementHistoryItem, Facture } from '@/lib/definitions';
 import Link from 'next/link';
 import { routes } from '@/config/routes-idkel';
+import { deleteOperation, getOperationHistory } from '@/actions/operations';
+import { useToast } from '@/hooks/use-toast';
+import { set } from 'lodash';
 
 const filterState = {
   date: [null, null],
   status: '',
   etat: 'devis',
 };
-export default function Encaissements({ className, datas }: { className?: string, datas: Facture[] }) {
+
+interface EncaissementsProps { 
+  className?: string, 
+  datas: Facture[], 
+  openHistory: boolean,
+  isHistoryLoading: boolean,
+
+  setNewOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  setOpenHistory: React.Dispatch<React.SetStateAction<boolean>>,
+  setHistoryData: React.Dispatch<React.SetStateAction<EncaissementHistoryItem[]>>,
+  setIsHistoryLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  refreshData: () => void,
+}
+
+export default function Encaissements({ className, datas, setNewOpen, refreshData, setOpenHistory, isHistoryLoading, setIsHistoryLoading, setHistoryData}: EncaissementsProps) {
   const [pageSize, setPageSize] = useState(7);
+  const { toast } = useToast();
 
   const onHeaderCellClick = (value: string) => ({
     onClick: () => {
@@ -30,10 +48,29 @@ export default function Encaissements({ className, datas }: { className?: string
     },
   });
 
-  const onDeleteItem = useCallback((id: string) => {
+  const onDeleteItem = useCallback(async (id: string) => {
     handleDelete(id);
+    const deletion = await deleteOperation(Number(id));
+    
+    if (deletion.success) {
+      refreshData();
+
+      toast({
+        title: "Opération effectuée",
+        description: "Encaissement supprimé avec succès",
+        className: "bg-green-500 text-white",
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const onHistoryItem = useCallback(async (id: string) => {
+    setOpenHistory(true); // On ouvre la modal des historiques
+    setIsHistoryLoading(true); // On affiche le loader
+    const historyDatas = await getOperationHistory(Number(id)); // On récupère les historiques de l'opération
+    setHistoryData(historyDatas);  // On met à jour les historiques
+    setIsHistoryLoading(false); // On cache le loader
+  }, [setHistoryData, setIsHistoryLoading, setOpenHistory]);
 
   const {
     isLoading,
@@ -63,6 +100,7 @@ export default function Encaissements({ className, datas }: { className?: string
         checkedItems: selectedRowKeys,
         onHeaderCellClick,
         onDeleteItem,
+        onHistoryItem,
         onChecked: handleRowSelect,
         handleSelectAll,
       }),
@@ -135,7 +173,7 @@ export default function Encaissements({ className, datas }: { className?: string
             prefix={<PiMagnifyingGlassBold className="h-4 w-4" />}
           />
           
-          <Button className="w-[300px] @[42rem]:w-[200px] h-[40px]">
+          <Button className="w-[300px] @[42rem]:w-[200px] h-[40px]" onClick={() => setNewOpen(true)}>
             Nouveau
           </Button>
         </div>

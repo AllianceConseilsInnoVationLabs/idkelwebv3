@@ -11,6 +11,18 @@ import { formatMillier, formatTel, getInitials } from '@/lib/utils';
 import { ArrowRight, Eye, Pencil, Trash2 } from 'lucide-react';
 import { FactureItemService } from '@/lib/definitions';
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 const statusOptions = [
   { label: 'Live', value: 'Live' },
   { label: 'Closed', value: 'Closed' },
@@ -22,6 +34,7 @@ type Columns = {
   handleSelectAll: any;
   checkedItems: string[];
   onDeleteItem: (id: string) => void;
+  onHistoryItem: (id: string) => void;
   onHeaderCellClick: (value: string) => void;
   onChecked?: (id: string) => void;
 };
@@ -32,6 +45,7 @@ export const getColumns = ({
   sortConfig,
   checkedItems,
   onDeleteItem,
+  onHistoryItem,
   handleSelectAll,
   onHeaderCellClick,
 }: Columns) => [
@@ -134,17 +148,35 @@ export const getColumns = ({
     render: (client_id: number, row: any) => {
       return (
         <div className="flex justify-end gap-x-2">
-          <Button variant="flat" size="sm" rounded="pill">
+          <Button variant="flat" size="sm" rounded="pill" onClick={() => onHistoryItem(row.id)}>
             Voir historique
           </Button>
 
-          <Tooltip size="sm" placement="top" content={"Afficher les détails"} color="invert">
+          {/* <Tooltip size="sm" placement="top" content={"Afficher les détails"} color="invert">
             <Button size="sm" rounded="pill" color="secondary"><Pencil size={16}/></Button>
-          </Tooltip>
+          </Tooltip> */}
 
-          <Tooltip size="sm" placement="top" content={"Supprimer"} color="invert">
-            <Button size="sm" rounded="pill" color="danger"><Trash2 size={16}/></Button>
-          </Tooltip>
+          <AlertDialog>
+            <AlertDialogTrigger>
+              <Tooltip size="sm" placement="top" content={"Supprimer"} color="invert">
+                <Button size="sm" rounded="pill" color="danger"><Trash2 size={16}/></Button>
+              </Tooltip>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Voulez-vous supprimer cet élément?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Cette action une fois validée sera irréversible et les données associées seront supprimées.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Annuler</AlertDialogCancel>
+                <AlertDialogAction onClick={() => {onDeleteItem(row.id)}} className="hover:text-primary">
+                  Supprimer
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </div>
       );
     },

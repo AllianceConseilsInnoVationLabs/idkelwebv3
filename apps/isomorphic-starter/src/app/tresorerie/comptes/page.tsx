@@ -181,8 +181,6 @@ export default function TresorerieComptes() {
             const datas = await fetch('/api/tresorerie/comptes', {
                 method: 'GET'
             }).then((res) => res.json());
-            
-            console.log(datas);
 
             const {soldes, comptes} = datas;
             
@@ -190,7 +188,6 @@ export default function TresorerieComptes() {
             setCaisseSolde(soldes.caisse);
             setBanqueSolde(soldes.banque);
 
-            console.log(comptes);
             setSubAccounts(comptes);
             setTransactions(datas.transactions);
 

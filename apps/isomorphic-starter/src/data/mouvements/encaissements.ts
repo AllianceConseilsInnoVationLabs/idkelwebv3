@@ -239,3 +239,38 @@ export const encaissements = [
         "quantite": null
     }
 ];
+
+export const historiqueEncaissements = [
+    {
+        "id": 245,
+        "libelle": "Encaissement test #5473930",
+        "date": "2024-11-09 00:00:00",
+        "montant": "10000.00",
+        "nouveau_solde_compte": "175000.00",
+        "solde_global_caisse": "3067915.00",
+        "reste_a_payer": "90000.00",
+        "solde_global_banque": "3575340.00",
+        "mouvement_id": 334,
+        "compte_id": 264,
+        "type_compte": "Caisse",
+        "created_at": "2024-11-06T00:58:36.000000Z",
+        "updated_at": "2024-11-06T00:58:36.000000Z",
+        "paiement_id": "55a0ae75-2ec6-4f72-8d4d-1d69e5a4e204"
+    },
+    {
+        "id": 244,
+        "libelle": "Encaissement facture #4546783",
+        "date": "2024-11-06 00:00:00",
+        "montant": "100000.00",
+        "nouveau_solde_compte": "165000.00",
+        "solde_global_caisse": "3057915.00",
+        "reste_a_payer": "0.00",
+        "solde_global_banque": "3575340.00",
+        "mouvement_id": 333,
+        "compte_id": 264,
+        "type_compte": "Caisse",
+        "created_at": "2024-11-06T00:52:35.000000Z",
+        "updated_at": "2024-11-06T00:52:35.000000Z",
+        "paiement_id": "6095db69-7f64-4be1-ae6c-02ce9bcacb7d"
+    }
+];

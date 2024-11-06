@@ -22,7 +22,6 @@ export default function ProfileMenu({
   username?: boolean;
 }) {
   const { user, isAuthenticated } = useAuth();
-  console.log(process.env.NEXT_PUBLIC_DEFAULT_AVATAR);
 
   return (
     <ProfileMenuPopover>
@@ -90,7 +89,6 @@ const menuItems = [
 
 function DropdownMenu() {
   const { user, isAuthenticated } = useAuth();
-  console.log(user);
 
   return (
     <div className="w-64 text-left rtl:text-right">

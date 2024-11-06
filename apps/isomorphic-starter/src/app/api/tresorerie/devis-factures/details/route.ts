@@ -9,7 +9,6 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams
     const id = searchParams.get('id');
     
-    console.log(id);
     const datas = await fetch(`${apibase}/client/devis/${id}`)
             .then((res) => res.json());
     

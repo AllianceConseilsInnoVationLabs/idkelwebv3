@@ -50,10 +50,6 @@ export default function DevisFactures() {
         (refreshData)();
     }, []);
 
-    useEffect(() => {
-        console.log('Devis : ', withdrawDevis);
-    }, [withdrawDevis]);
-
     return (
         <div className={`w-full ${loading ? 'flex justify-center h-[80vh]' : ''}`}>
             {loading && <Loader variant='spinner' size="xl" />}

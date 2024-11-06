@@ -35,7 +35,7 @@ const CreateMaterielItem = ({setButton, className = '', magasins, newItem, setNe
         if(!option){
             setMagasin(null);
             const { magasin_id, ...rest } = newItem;
-            setNewItem({...rest});
+            setNewItem && setNewItem({...rest});
 
             handleProduit(null);
             return ;
@@ -49,7 +49,7 @@ const CreateMaterielItem = ({setButton, className = '', magasins, newItem, setNe
         if(!option){
             setProduit(null);
             const { produit_id, stock_id, total, pu, qte, ...rest } = newItem;
-            setNewItem({...rest});
+            setNewItem && setNewItem({...rest});
             setProduitPrice(0);
             setProduitQuantity(0);
 
@@ -64,7 +64,7 @@ const CreateMaterielItem = ({setButton, className = '', magasins, newItem, setNe
             setProduitPrice(Number(produitItem.prix_vente));
 
             setProduit(option);
-            setNewItem({
+            setNewItem && setNewItem({
                 ...newItem,
                 type: "materiel",
                 produit_id: produitItem.produit.id,
@@ -85,7 +85,6 @@ const CreateMaterielItem = ({setButton, className = '', magasins, newItem, setNe
         }
 
         let magasinItem: FactureItemMagasin | undefined = magasins.find(a => a.id === magasin.value);
-        console.log(magasinItem?.produits);
         let temp = magasinItem?.produits?.map((produit) => {
             return {
                 value: produit.id,
@@ -127,13 +126,13 @@ const CreateMaterielItem = ({setButton, className = '', magasins, newItem, setNe
                 setTotal(temp - remiseValue);
             }
             
-            setNewItem({
+            setNewItem && setNewItem({
                 ...newItem,
                 ...obj
             });
         }else{
             const {remise, ...rest} = newItem;
-            setNewItem({
+            setNewItem && setNewItem({
               ...rest,
               ...obj
             });
@@ -144,15 +143,15 @@ const CreateMaterielItem = ({setButton, className = '', magasins, newItem, setNe
 
     useEffect(() => {
         if(magasin !== null && total > 0){
-            setButton(true);
+            setButton && setButton(true);
         }else{
             if(total == 0 && remiseType !== null && remiseType.value !== 'no')
-                setButton(true);
+                setButton && setButton(true);
             else
-                setButton(false);
+                setButton && setButton(false);
         }
 
-        setNewItem({
+        setNewItem && setNewItem({
             ...newItem,
             total: total
         });

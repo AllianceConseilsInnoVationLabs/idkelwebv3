@@ -12,8 +12,6 @@ export async function GET() {
 
     const SubAccounts = await fetch(`${apibase}/client/listeComptes/${client.id}`)
         .then((res) => res.json());
-
-    console.log(SubAccounts);
     
     const datas = { 
         items: DevisFactures,
