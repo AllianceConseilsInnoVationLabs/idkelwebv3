@@ -64,3 +64,20 @@ export type WithdrawDevisForm =
         message?: string
     }
     | undefined
+    
+export type CreateEncaissementForm = 
+    | {
+        errors?: {
+            intutle?: string[],
+            montant?: string[],
+            facturedate?: string[],
+            checkdate?: string[],
+            customer?: string[],
+            compte?: string[],
+            service?: string[],
+            sellmode?: string[],
+            partial?: string[],
+        },
+        message?: string
+    }
+    | undefined

@@ -81,7 +81,7 @@ export default function NewWithdrawModal({ isOpen, setOpen, subAccounts, devis, 
     }, [formState]);
 
     return (
-        <Modal isOpen={isOpen} onClose={() => setOpen(false)} className="withdraw-modal">
+        <Modal isOpen={isOpen} onClose={() => setOpen(false)} className="overflow-modal">
             <div className="m-auto px-7 pt-6 pb-8">
                 <div className="mb-7 flex items-center justify-between">
                     <Text className="text-lg font-semibold">Encaisser un montant</Text>

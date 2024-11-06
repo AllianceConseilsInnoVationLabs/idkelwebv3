@@ -140,6 +140,8 @@ export type FactureItemStock = {
     magasin_id: number,
     created_at: string,
     updated_at: string
+
+    produit?: FactureItemProduit
 }
 
 export type FactureItem = {

@@ -61,13 +61,13 @@ const CreateServiceItem = ({setButton, className = '', services, newItem, setNew
               setTotal(temp - remiseValue);
             }
 
-            setNewItem({
+            setNewItem && setNewItem({
               ...newItem,
               ...obj
             });
         }else{
             const {remise, ...rest} = newItem;
-            setNewItem({
+            setNewItem && setNewItem({
               ...rest,
               ...obj
             });
@@ -82,15 +82,15 @@ const CreateServiceItem = ({setButton, className = '', services, newItem, setNew
      */
     useEffect(() => {
         if(service !== null && total > 0){
-            setButton(true);
+          setButton && setButton(true);
         }else{
             if(total == 0 && remiseType !== null && remiseType.value !== 'no')
-                setButton(true);
+              setButton && setButton(true);
             else
-                setButton(false);
+              setButton && setButton(false);
         }
 
-        setNewItem({
+        setNewItem && setNewItem({
             ...newItem,
             total: total
         });
@@ -98,7 +98,7 @@ const CreateServiceItem = ({setButton, className = '', services, newItem, setNew
 
     const handleServiceChange = (option: any) => {
         setService(option);
-        setNewItem({
+        setNewItem && setNewItem({
             ...newItem,
             service_id: option.value
         })

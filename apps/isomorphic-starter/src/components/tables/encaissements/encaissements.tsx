@@ -15,14 +15,26 @@ import DatePicker from '@/components/datepicker';
 import { Facture } from '@/lib/definitions';
 import Link from 'next/link';
 import { routes } from '@/config/routes-idkel';
+import { deleteOperation } from '@/actions/operations';
+import { useToast } from '@/hooks/use-toast';
 
 const filterState = {
   date: [null, null],
   status: '',
   etat: 'devis',
 };
-export default function Encaissements({ className, datas }: { className?: string, datas: Facture[] }) {
+
+interface EncaissementsProps { 
+  className?: string, 
+  datas: Facture[], 
+  setNewOpen: any 
+
+  refreshData: () => void,
+}
+
+export default function Encaissements({ className, datas, setNewOpen, refreshData}: EncaissementsProps) {
   const [pageSize, setPageSize] = useState(7);
+  const { toast } = useToast();
 
   const onHeaderCellClick = (value: string) => ({
     onClick: () => {
@@ -30,9 +42,24 @@ export default function Encaissements({ className, datas }: { className?: string
     },
   });
 
-  const onDeleteItem = useCallback((id: string) => {
+  const onDeleteItem = useCallback(async (id: string) => {
     handleDelete(id);
+    const deletion = await deleteOperation(Number(id));
+    
+    if (deletion.success) {
+      refreshData();
+
+      toast({
+        title: "Opération effectuée",
+        description: "Encaissement supprimé avec succès",
+        className: "bg-green-500 text-white",
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onHistoryItem = useCallback((id: string) => {
+    
   }, []);
 
   const {
@@ -63,6 +90,7 @@ export default function Encaissements({ className, datas }: { className?: string
         checkedItems: selectedRowKeys,
         onHeaderCellClick,
         onDeleteItem,
+        onHistoryItem,
         onChecked: handleRowSelect,
         handleSelectAll,
       }),
@@ -135,7 +163,7 @@ export default function Encaissements({ className, datas }: { className?: string
             prefix={<PiMagnifyingGlassBold className="h-4 w-4" />}
           />
           
-          <Button className="w-[300px] @[42rem]:w-[200px] h-[40px]">
+          <Button className="w-[300px] @[42rem]:w-[200px] h-[40px]" onClick={() => setNewOpen(true)}>
             Nouveau
           </Button>
         </div>

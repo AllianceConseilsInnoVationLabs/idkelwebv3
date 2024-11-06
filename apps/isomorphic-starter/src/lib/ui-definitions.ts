@@ -1,3 +1,4 @@
+import { SelectOption } from "rizzui";
 import { FactureItemMagasin, FactureItemService } from "./definitions";
 
 export interface ISectionProps {
@@ -43,18 +44,27 @@ export interface INewSubAccountProps {
 }
 
 export interface ICreateItemProps {
-    setButton: React.Dispatch<React.SetStateAction<boolean>>;
+    setButton?: React.Dispatch<React.SetStateAction<boolean>>;
     className?: string;
-    newItem: any;
-    setNewItem: React.Dispatch<React.SetStateAction<any>>;
+    newItem?: any;
+    setNewItem?: React.Dispatch<React.SetStateAction<any>>;
 }
 
 export interface ICreateItemServiceProps extends ICreateItemProps {
     services: FactureItemService[];
+    setServiceOrStockGood?: React.Dispatch<React.SetStateAction<boolean>>;
+    service?: SelectOption | null,
+    setService?: React.Dispatch<React.SetStateAction<SelectOption | null>>;
 }
 
 export interface ICreateItemMaterielProps extends ICreateItemProps {
     magasins: FactureItemMagasin[];
+    setServiceOrStockGood?: React.Dispatch<React.SetStateAction<boolean>>;
+    magasin?: SelectOption | null,
+    setMagasin?: React.Dispatch<React.SetStateAction<SelectOption | null>>;
+    stock?: SelectOption | null,
+    setStock?: React.Dispatch<React.SetStateAction<SelectOption | null>>;
+    state?: any;
 }
 
 export interface IModalProps {
@@ -79,5 +89,18 @@ export interface INewWithdrawProps extends IModalProps {
     subAccounts: any[],
     devis: any | null,
     setDevis: React.Dispatch<React.SetStateAction<any | null>>,
+    refreshData: () => void
+}
+
+export interface INewOperationProps extends IModalProps {
+    operation: string,
+    title: string,
+    services: FactureItemService[],
+    magasins: FactureItemMagasin[],
+    customers: any[],
+    produits: any[],
+    subAccounts: any[],
+    tvas: any[],
+    regime: string,
     refreshData: () => void
 }
