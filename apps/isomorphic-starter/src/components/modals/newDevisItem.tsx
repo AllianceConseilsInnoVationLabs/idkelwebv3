@@ -44,10 +44,6 @@ const NewDevisItem = ({ isOpen, setOpen, services, magasins, items, setItems } :
         setNewItem({});
         setOpen(false);
     }
-
-    useEffect(() => {
-        console.log('newItem', newItem);
-    }, [newItem]);
     
     return (
         <Modal isOpen={isOpen} onClose={() => setOpen(false)}>

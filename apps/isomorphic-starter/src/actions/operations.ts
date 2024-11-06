@@ -77,7 +77,6 @@ export async function createOperation(params: any[], state: CreateEncaissementFo
         }
     }else if(type === "stock"){
         const qte = parseInt(formData.get('qte') as string);
-        console.log('Quantite', qte);
 
         if( isNaN(qte) || partial <= 0 ){
             return {
@@ -132,7 +131,6 @@ export async function deleteOperation(id: number) {
     const response = await fetch(`${apibase}/client/DeleteMouvement/${id}`);
     const data = await response.json();
 
-    console.log(data);
     return data;
 }
 
@@ -142,7 +140,5 @@ export async function getOperationHistory(id: number) {
     });
 
     const data = await response.json();
-    console.log(data);
-    
     return data;
 }

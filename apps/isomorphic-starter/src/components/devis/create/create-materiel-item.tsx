@@ -85,7 +85,6 @@ const CreateMaterielItem = ({setButton, className = '', magasins, newItem, setNe
         }
 
         let magasinItem: FactureItemMagasin | undefined = magasins.find(a => a.id === magasin.value);
-        console.log(magasinItem?.produits);
         let temp = magasinItem?.produits?.map((produit) => {
             return {
                 value: produit.id,

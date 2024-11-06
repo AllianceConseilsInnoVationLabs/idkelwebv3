@@ -82,9 +82,6 @@ const viewOptions = [
 
 export default function TurnoverHistory({ className, title = "Chiffre d'affaires", amount=29765934 }: { className?: string, title?: string, amount?: number }) {
   const isTablet = useMedia('(max-width: 820px)', false);
-  function handleChange(viewType: string) {
-    console.log('viewType', viewType);
-  }
 
   return (
     <WidgetCard

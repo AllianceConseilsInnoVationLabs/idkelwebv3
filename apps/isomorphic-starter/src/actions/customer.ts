@@ -16,9 +16,6 @@ export async function createCustomer(state: CreateCustomerForm, formData: FormDa
         telephone: formData.get('telephone'),
         adresse: formData.get('adresse'),
     });
-    
-    console.log(formData.get('nom'));
-    console.log(validatedFields?.error?.flatten().fieldErrors);
 
     // If any form fields are invalid, return early
     if (!validatedFields.success) {
@@ -46,7 +43,6 @@ export async function createCustomer(state: CreateCustomerForm, formData: FormDa
     );
 
     const data = await response.json();
-    console.log(data);
 
     if(!data.success) {
         return data;

@@ -53,8 +53,6 @@ export default function EncaissementsPage() {
         const datas = await fetch('/api/tresorerie/encaissements', {
             method: 'GET'
         }).then((res) => res.json());
-        
-        console.log(datas);
 
         setItems(datas.items);
         setCustomers(datas.customers);

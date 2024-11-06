@@ -22,7 +22,6 @@ export async function createDevis(params: any[], state: CreateDevisForm, formDat
 
     let validatedFields: any = {};
     validatedFields = createDevisSchema.safeParse(fields);
-    console.log(validatedFields?.error?.flatten().fieldErrors);
     
     // If any form fields are invalid, return early
     if (!validatedFields.success) {
@@ -30,14 +29,6 @@ export async function createDevis(params: any[], state: CreateDevisForm, formDat
             errors: validatedFields.error.flatten().fieldErrors,
         }
     }
-
-    // console.log('Items', items);
-    // console.log('Customer', customer);
-    // console.log('Date Emission', format(emissionDate, "yyyy-MM-dd"));
-    // console.log('Date Echeance', format(echeanceDate, "yyyy-MM-dd"));
-    // console.log('Numéro de facture', formData.get('num_facture'));
-    // console.log('Moyen de paiement', formData.get('payment_method'));
-    // console.log('total', total);
 
     const client: any = await retrieveStored('client');
     const montant = total.ht + total.tva - total.remise;
@@ -65,8 +56,6 @@ export async function createDevis(params: any[], state: CreateDevisForm, formDat
     );
 
     const data = await response.json();
-    // console.log(data);
-
     return data;
 }
 
@@ -94,7 +83,6 @@ export async function withdrawDevis(params: any[], state: WithdrawDevisForm, for
 
     let validatedFields: any = {};
     validatedFields = withdrawDevisSchema.safeParse(fields);
-    console.log(validatedFields?.error?.flatten().fieldErrors);
     
     // If any form fields are invalid, return early
     if (!validatedFields.success) {
@@ -134,7 +122,6 @@ export async function withdrawDevis(params: any[], state: WithdrawDevisForm, for
 export async function deleteDevis(id:number) {
     const response = await fetch(`${apibase}/client/devis/delete/${id}`);
     const data = await response.json();
-    // console.log(data);
 
     if(!data.success) {
         return data;

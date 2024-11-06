@@ -62,7 +62,6 @@ export default function NewWithdrawModal({ isOpen, setOpen, subAccounts, devis, 
 
 
     useEffect(() => {
-        console.log(formState);
         if(formState?.success) {
             setOpen(false);
             setDevis(null);

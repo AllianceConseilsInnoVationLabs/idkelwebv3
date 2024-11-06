@@ -9,7 +9,6 @@ const CreateServiceItem = ({className = '', services, setServiceOrStockGood, ser
     const [serviceOptions, setServiceOptions] = useState<SelectOption[]>([]);
 
     useEffect(() => {
-      console.log(services);
       let temp = services.map((service) => {
         return {
           value: service.id,

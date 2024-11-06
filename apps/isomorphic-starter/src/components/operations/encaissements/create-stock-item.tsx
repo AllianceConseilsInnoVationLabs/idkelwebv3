@@ -36,7 +36,6 @@ const CreateStockItem = ({className = '', magasins, setServiceOrStockGood, magas
     }
 
     const handleStockChange = (option: any) => {
-        console.log(option);
         setStock && setStock(option);
     }
 
