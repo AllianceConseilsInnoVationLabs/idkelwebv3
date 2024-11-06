@@ -1,5 +1,5 @@
 import { SelectOption } from "rizzui";
-import { FactureItemMagasin, FactureItemService } from "./definitions";
+import { EncaissementHistoryItem, FactureItemMagasin, FactureItemService } from "./definitions";
 
 export interface ISectionProps {
     title?: string;
@@ -69,7 +69,8 @@ export interface ICreateItemMaterielProps extends ICreateItemProps {
 
 export interface IModalProps {
     isOpen: boolean,
-    setOpen: React.Dispatch<React.SetStateAction<boolean>>
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    title?: string,
 }
 
 export interface INewDevisItemProps extends IModalProps {
@@ -94,7 +95,6 @@ export interface INewWithdrawProps extends IModalProps {
 
 export interface INewOperationProps extends IModalProps {
     operation: string,
-    title: string,
     services: FactureItemService[],
     magasins: FactureItemMagasin[],
     customers: any[],
@@ -103,4 +103,12 @@ export interface INewOperationProps extends IModalProps {
     tvas: any[],
     regime: string,
     refreshData: () => void
+}
+
+export interface IHistoryOperationProps extends IModalProps {
+    accounts: any[],
+    historyData: EncaissementHistoryItem[],
+    
+    loading: boolean,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>,
 }

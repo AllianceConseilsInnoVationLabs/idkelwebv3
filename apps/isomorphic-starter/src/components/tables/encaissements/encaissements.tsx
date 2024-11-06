@@ -12,11 +12,12 @@ import { getColumns } from './columns';
 import FilterElement from './filter-element';
 import DatePicker from '@/components/datepicker';
 
-import { Facture } from '@/lib/definitions';
+import { EncaissementHistoryItem, Facture } from '@/lib/definitions';
 import Link from 'next/link';
 import { routes } from '@/config/routes-idkel';
-import { deleteOperation } from '@/actions/operations';
+import { deleteOperation, getOperationHistory } from '@/actions/operations';
 import { useToast } from '@/hooks/use-toast';
+import { set } from 'lodash';
 
 const filterState = {
   date: [null, null],
@@ -27,12 +28,17 @@ const filterState = {
 interface EncaissementsProps { 
   className?: string, 
   datas: Facture[], 
-  setNewOpen: any 
+  openHistory: boolean,
+  isHistoryLoading: boolean,
 
+  setNewOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  setOpenHistory: React.Dispatch<React.SetStateAction<boolean>>,
+  setHistoryData: React.Dispatch<React.SetStateAction<EncaissementHistoryItem[]>>,
+  setIsHistoryLoading: React.Dispatch<React.SetStateAction<boolean>>,
   refreshData: () => void,
 }
 
-export default function Encaissements({ className, datas, setNewOpen, refreshData}: EncaissementsProps) {
+export default function Encaissements({ className, datas, setNewOpen, refreshData, setOpenHistory, isHistoryLoading, setIsHistoryLoading, setHistoryData}: EncaissementsProps) {
   const [pageSize, setPageSize] = useState(7);
   const { toast } = useToast();
 
@@ -58,9 +64,13 @@ export default function Encaissements({ className, datas, setNewOpen, refreshDat
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onHistoryItem = useCallback((id: string) => {
-    
-  }, []);
+  const onHistoryItem = useCallback(async (id: string) => {
+    setOpenHistory(true); // On ouvre la modal des historiques
+    setIsHistoryLoading(true); // On affiche le loader
+    const historyDatas = await getOperationHistory(Number(id)); // On récupère les historiques de l'opération
+    setHistoryData(historyDatas);  // On met à jour les historiques
+    setIsHistoryLoading(false); // On cache le loader
+  }, [setHistoryData, setIsHistoryLoading, setOpenHistory]);
 
   const {
     isLoading,

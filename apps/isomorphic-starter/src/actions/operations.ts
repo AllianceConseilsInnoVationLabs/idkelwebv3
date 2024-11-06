@@ -135,3 +135,14 @@ export async function deleteOperation(id: number) {
     console.log(data);
     return data;
 }
+
+export async function getOperationHistory(id: number) {
+    const response = await fetch(`${apibase}/client/liste-paiement-partiel/${id}`, {
+        method: 'POST',
+    });
+
+    const data = await response.json();
+    console.log(data);
+    
+    return data;
+}

@@ -3,12 +3,14 @@
 import React, { useEffect, useState } from 'react';
 import { useTitle } from '@/context/pageTitleContext';
 import { routes } from "@/config/routes-idkel";
-import { Facture, FactureItemMagasin, FactureItemService } from '@/lib/definitions';
+import { EncaissementHistoryItem, Facture, FactureItemMagasin, FactureItemService } from '@/lib/definitions';
 import Devis from '@/components/tables/devis/devis';
 import Encaissements from '@/components/tables/encaissements/encaissements';
 import { getInitials } from '@/lib/utils';
 import { Loader } from 'rizzui';
 import NewOperationModal from '@/components/modals/newOperation';
+import HistoryOperationModal from '@/components/modals/historyOperation';
+import { historiqueEncaissements } from '@/data/mouvements/encaissements';
 
 const breadcrumb = [
     {
@@ -29,8 +31,11 @@ export default function EncaissementsPage() {
     const { setTitle, setBreadcrumb } = useTitle();
     const [items, setItems] = useState<Facture[]>([]);
     const [loading, setLoading] = useState(true);
+    const [isHistoryLoading, setIsHistoryLoading] = useState(true);
 
     const [isNewOpen, setNewOpen] = useState<boolean>(false);
+    const [isHistoryOpen, setIsHistoryOpen] = useState<boolean>(false);
+
     const [customers, setCustomers] = useState<any[]>([]);
     const [services, setServices] = useState<FactureItemService[]>([]);
     const [produits, setProduits] = useState<any[]>([]);
@@ -38,6 +43,7 @@ export default function EncaissementsPage() {
     const [subAccounts, setSubAccounts] = useState<any[]>([]);
     const [tvas, setTvas] = useState<any[]>([]);
     const [regime, setRegime] = useState<string>('');
+    const [historyData, setHistoryData] = useState<EncaissementHistoryItem[]>(historiqueEncaissements);
 
     setTitle('Encaissements');
     setBreadcrumb(breadcrumb);
@@ -74,6 +80,12 @@ export default function EncaissementsPage() {
                 datas={items}
                 setNewOpen={setNewOpen}
                 refreshData={refreshData}
+
+                openHistory={isHistoryOpen}
+                setOpenHistory={setIsHistoryOpen}
+                setHistoryData={setHistoryData}
+                isHistoryLoading={isHistoryLoading}
+                setIsHistoryLoading={setIsHistoryLoading}
             />}
 
             <NewOperationModal 
@@ -89,6 +101,15 @@ export default function EncaissementsPage() {
                 regime={regime}
                 tvas={tvas}
                 refreshData={refreshData}
+            />
+
+            <HistoryOperationModal
+                isOpen={isHistoryOpen}
+                setOpen={setIsHistoryOpen}
+                accounts={subAccounts}
+                loading={isHistoryLoading}
+                setLoading={setIsHistoryLoading}
+                historyData={historyData}
             />
         </div>
     )
