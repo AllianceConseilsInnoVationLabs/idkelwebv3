@@ -12,5 +12,8 @@ export const routes = {
         encaissements: {
             index: "/tresorerie/encaissements",
         },
+        decaissements: {
+            index: "/tresorerie/decaissements",
+        },
     }
 }

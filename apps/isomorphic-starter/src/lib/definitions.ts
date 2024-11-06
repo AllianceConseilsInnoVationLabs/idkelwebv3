@@ -188,12 +188,12 @@ export type FactureMouvement = {
     created_at: string,
     updated_at: string,
     partial_amount: null | number,
-    taux_paiement: null,
-    compte_prinicipal_entreprise_id: null,
-    fournisseur_id: null,
-    magasin_id: null,
-    stock_id: null,
-    quantite: null
+    taux_paiement: number | null,
+    compte_prinicipal_entreprise_id: number | null,
+    fournisseur_id: number | null,
+    magasin_id: number | null,
+    stock_id: number | null,
+    quantite: number | null
 }
 
 export type FactureCustomer = {
@@ -254,4 +254,38 @@ export type EncaissementHistoryItem = {
     created_at: string,
     updated_at: string,
     paiement_id: string | null,
+}
+
+export type FactureFournisseurItem = {
+    id: number,
+    email_fournisseur: string | null,
+    nom_fournisseur: string,
+    prenom_fournisseur: string | null,
+    adresse_fournisseur: string | null,
+    tel_fournisseur: string | null,
+    client_id: number,
+    secteur_id: number | null,
+    created_at: string,
+    updated_at: string | null,
+
+    secteur?: SecteurItem,
+    client?: Client,
+}
+
+export type SecteurItem = {
+    id: number,
+    libelle: string,
+    created_at: string | null,
+    updated_at: string | null,
+}
+
+export type FactureChargeItem = {
+    id: number,
+    nom_charge: string,
+    slug: string,
+    client_id: number,
+    created_at: string | null,
+    updated_at: string | null,
+
+    client?: Client,
 }

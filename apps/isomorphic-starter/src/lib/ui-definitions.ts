@@ -1,5 +1,5 @@
 import { SelectOption } from "rizzui";
-import { EncaissementHistoryItem, FactureItemMagasin, FactureItemService } from "./definitions";
+import { EncaissementHistoryItem, FactureChargeItem, FactureFournisseurItem, FactureItemMagasin, FactureItemService } from "./definitions";
 
 export interface ISectionProps {
     title?: string;
@@ -93,16 +93,28 @@ export interface INewWithdrawProps extends IModalProps {
     refreshData: () => void
 }
 
-export interface INewOperationProps extends IModalProps {
-    operation: string,
-    services: FactureItemService[],
-    magasins: FactureItemMagasin[],
-    customers: any[],
-    produits: any[],
+export interface INewOperationProps{
     subAccounts: any[],
     tvas: any[],
     regime: string,
     refreshData: () => void
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+}
+
+export interface INewEncaissementProps extends INewOperationProps {
+    services: FactureItemService[],
+    magasins: FactureItemMagasin[],
+    customers: any[],
+    produits: any[],
+}
+
+export interface INewDecaissementsProps extends INewOperationProps {
+    fournisseurs: FactureFournisseurItem[],
+    charges: FactureChargeItem[],
+}
+
+export interface INewOperationModalProps extends IModalProps, INewEncaissementProps, INewDecaissementsProps {
+    operation: string,
 }
 
 export interface IHistoryOperationProps extends IModalProps {

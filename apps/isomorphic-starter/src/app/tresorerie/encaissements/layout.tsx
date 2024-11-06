@@ -5,6 +5,6 @@ export const metadata = {
     ...metaObject('Encaissements'),
 };
 
-export default function TresorerieEncaissementLayout({ children }: { children: React.ReactNode }) {
+export default function TresorerieDecaissementLayout({ children }: { children: React.ReactNode }) {
     return children;
 }

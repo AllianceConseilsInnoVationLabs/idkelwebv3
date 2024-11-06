@@ -43,8 +43,8 @@ export const getColumns = ({
     width: 70,
     render: (compte_id: string, row: any) => (
       <>
-        <Text className="font-bold">{row.compte.nom_compte}</Text>
-        <Text className="text-[11px]">{row.compte.compte_type}</Text>
+        <Text className="font-bold">{accounts.find(a => a.id === compte_id).nom_compte}</Text>
+        <Text className="text-[11px]">{accounts.find(a => a.id === compte_id).compte_type}</Text>
       </>
     ),
   },

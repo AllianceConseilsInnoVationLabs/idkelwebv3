@@ -6,9 +6,19 @@ import { formatMillier } from '@/lib/utils';
 interface ISelectAccountsProps {
     subAccounts: any,
     setAccountSelected?: any
+
+    labelType?: string,
+    labelCompte?: string,
+    inline?: boolean,
 }
 
-const SelectAccounts = ({subAccounts, setAccountSelected} : ISelectAccountsProps) => {
+const SelectAccounts = ({
+    subAccounts, 
+    setAccountSelected, 
+    labelType = "Vous voulez encaisser ce montant sur quel type de compte? *", 
+    labelCompte = "Compte à créditer *",
+    inline = false,
+} : ISelectAccountsProps) => {
     const [typeValue, setTypeValue] = useState<SelectOption | null>(null);
     const [senderValue, setSenderValue] = useState<SelectOption | null>(null);
     const [accounts, setAccounts] = useState<any[]>([]);
@@ -34,26 +44,26 @@ const SelectAccounts = ({subAccounts, setAccountSelected} : ISelectAccountsProps
     return (
         <>
             <Select
-                label={"Vous voulez encaisser ce montant sur quel type de compte? *"}
+                label={labelType}
                 placeholder={"Sélectionner..."}
                 options={CompteTypes}
                 value={typeValue}
                 onChange={setTypeValue}
-                className="col-span-2"
+                className={inline ? "" : "col-span-2"}
             />
             
             {typeValue !== null && (
                 <>
                     <input type="hidden" name="compte" value={senderValue?.value || ""} />
                     <Select
-                        label={'Compte à débiter'}
+                        label={labelCompte}
                         placeholder={"Sélectionner..."}
                         options={accounts}
                         value={senderValue}
                         onChange={setSenderValue}
                         searchable={true}
                         searchPlaceHolder={"Rechercher..."}
-                        className="col-span-2"
+                        className={inline ? "" : "col-span-2"}
                     />
                 </>
             )}

@@ -5,12 +5,12 @@ import { useTitle } from '@/context/pageTitleContext';
 import { routes } from "@/config/routes-idkel";
 import { EncaissementHistoryItem, Facture, FactureItemMagasin, FactureItemService } from '@/lib/definitions';
 import Devis from '@/components/tables/devis/devis';
-import Encaissements from '@/components/tables/encaissements/encaissements';
 import { getInitials } from '@/lib/utils';
 import { Loader } from 'rizzui';
 import NewOperationModal from '@/components/modals/newOperation';
 import HistoryOperationModal from '@/components/modals/historyOperation';
 import { historiqueEncaissements } from '@/data/mouvements/encaissements';
+import Decaissements from '@/components/tables/decaissements/decaissements';
 
 const breadcrumb = [
     {
@@ -22,12 +22,12 @@ const breadcrumb = [
         name: 'Ma trésorerie',
     },
     {
-        name: 'Encaissements',
+        name: 'Décaissements',
     },
 ];
 
 
-export default function EncaissementsPage() {
+export default function DecaissementsPage() {
     const { setTitle, setBreadcrumb } = useTitle();
     const [items, setItems] = useState<Facture[]>([]);
     const [loading, setLoading] = useState(true);
@@ -47,14 +47,16 @@ export default function EncaissementsPage() {
     const [regime, setRegime] = useState<string>('');
     const [historyData, setHistoryData] = useState<EncaissementHistoryItem[]>(historiqueEncaissements);
 
-    setTitle('Encaissements');
+    setTitle('Décaissements');
     setBreadcrumb(breadcrumb);
 
     const refreshData = async () => {
         setLoading(true);
-        const datas = await fetch('/api/tresorerie/encaissements', {
+        const datas = await fetch('/api/tresorerie/decaissements', {
             method: 'GET'
         }).then((res) => res.json());
+
+        console.log(datas);
 
         setItems(datas.items);
         setCustomers(datas.customers);
@@ -77,7 +79,7 @@ export default function EncaissementsPage() {
     return (
         <div className={`w-full ${loading ? 'flex justify-center h-[80vh]' : ''}`}>
             {loading && <Loader variant='spinner' size="xl" />}
-            {items.length > 0 && !loading && <Encaissements 
+            {items.length > 0 && !loading && <Decaissements 
                 className="w-full rounded-2xl border-none bg-idkel-gray" 
                 datas={items}
                 setNewOpen={setNewOpen}
@@ -91,9 +93,9 @@ export default function EncaissementsPage() {
             />}
 
             <NewOperationModal 
-                operation={'encaissement'}
-                title="Nouvel encaissement"
-                isOpen={isNewOpen} 
+                operation={'decaissement'}
+                title="Nouveau décaissement"
+                isOpen={isNewOpen}
                 setOpen={setNewOpen}
                 customers={customers}
                 services={services}
@@ -107,14 +109,14 @@ export default function EncaissementsPage() {
                 refreshData={refreshData}
             />
 
-            <HistoryOperationModal
+            {subAccounts.length > 0 && <HistoryOperationModal
                 isOpen={isHistoryOpen}
                 setOpen={setIsHistoryOpen}
                 accounts={subAccounts}
                 loading={isHistoryLoading}
                 setLoading={setIsHistoryLoading}
                 historyData={historyData}
-            />
+            />}
         </div>
     )
 };

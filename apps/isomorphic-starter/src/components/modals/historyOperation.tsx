@@ -48,7 +48,7 @@ const HistoryOperationModal = ({ isOpen, setOpen, title = "Historique des mouvem
                                 getColumns={getColumns}
                                 accounts={accounts}
                                 enableSearch={false}
-                                className="lg:p-0"
+                                className="lg:p-0 border-none"
                             />
                         )}
 

@@ -47,7 +47,7 @@ export const menuItems = [
       },
       {
         name: "Décaissement",
-        href: '#',
+        href: routes.tresorerie.decaissements.index,
         badge: "",
       },
     ]
