@@ -124,3 +124,12 @@ export interface IHistoryOperationProps extends IModalProps {
     loading: boolean,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>,
 }
+
+export interface INewSubEncaissementProps{
+    accounts: any[],
+    selected: any | null,
+    
+    refreshData: () => void
+    setOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    setSelected: React.Dispatch<React.SetStateAction<any | null>>,
+}

@@ -2,7 +2,7 @@
 
 import { retrieveStored } from "@/lib/session";
 import { encWASchema, encWOASchema, decWASchema, decWOASchema } from '@/validators/idkel/operation.schema';
-import { CreateEncaissementForm } from '@/lib/form-definitions';
+import { CreateEncaissementForm, CreateSubOperationForm } from '@/lib/form-definitions';
 import { format } from 'date-fns';
 
 const apibase = process.env.API_BASE_URL;
@@ -184,4 +184,8 @@ export async function getOperationHistory(id: number) {
 
     const data = await response.json();
     return data;
+}
+
+export async function createSubOperation(params: any[], state: CreateSubOperationForm, formData: FormData) {
+    console.log(params);
 }

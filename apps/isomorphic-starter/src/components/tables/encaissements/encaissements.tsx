@@ -32,13 +32,26 @@ interface EncaissementsProps {
   isHistoryLoading: boolean,
 
   setNewOpen: React.Dispatch<React.SetStateAction<boolean>>,
+  setSubOpen: React.Dispatch<React.SetStateAction<boolean>>,
   setOpenHistory: React.Dispatch<React.SetStateAction<boolean>>,
   setHistoryData: React.Dispatch<React.SetStateAction<EncaissementHistoryItem[]>>,
   setIsHistoryLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  setSelectedOperation: React.Dispatch<React.SetStateAction<any | null>>,
   refreshData: () => void,
 }
 
-export default function Encaissements({ className, datas, setNewOpen, refreshData, setOpenHistory, isHistoryLoading, setIsHistoryLoading, setHistoryData}: EncaissementsProps) {
+export default function Encaissements({ 
+  className, 
+  datas, 
+  setNewOpen, 
+  refreshData, 
+  setOpenHistory, 
+  isHistoryLoading, 
+  setIsHistoryLoading,
+  setHistoryData, 
+  setSubOpen, 
+  setSelectedOperation,
+} : EncaissementsProps) {
   const [pageSize, setPageSize] = useState(7);
   const { toast } = useToast();
 
@@ -72,6 +85,12 @@ export default function Encaissements({ className, datas, setNewOpen, refreshDat
     setIsHistoryLoading(false); // On cache le loader
   }, [setHistoryData, setIsHistoryLoading, setOpenHistory]);
 
+  const onSubOperation = useCallback((row: any) => {
+    console.log(row);
+    setSelectedOperation(row);
+    setSubOpen(true);
+  }, [setSubOpen]);
+
   const {
     isLoading,
     isFiltered,
@@ -101,6 +120,7 @@ export default function Encaissements({ className, datas, setNewOpen, refreshDat
         onHeaderCellClick,
         onDeleteItem,
         onHistoryItem,
+        onSubOperation,
         onChecked: handleRowSelect,
         handleSelectAll,
       }),

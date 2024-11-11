@@ -35,6 +35,7 @@ type Columns = {
   checkedItems: string[];
   onDeleteItem: (id: string) => void;
   onHistoryItem: (id: string) => void;
+  onSubOperation: (row: any) => void;
   onHeaderCellClick: (value: string) => void;
   onChecked?: (id: string) => void;
 };
@@ -46,6 +47,7 @@ export const getColumns = ({
   checkedItems,
   onDeleteItem,
   onHistoryItem,
+  onSubOperation,
   handleSelectAll,
   onHeaderCellClick,
 }: Columns) => [
@@ -133,7 +135,7 @@ export const getColumns = ({
           )}
           
           { status !== 'Payé' && (
-            <Badge color="warning">{ formatMillier(row.montant - (row.partial_amount || 0)) }</Badge>
+            <Badge color="warning" className="cursor:pointer" onClick={() => onSubOperation(row)}>{ formatMillier(row.montant - (row.partial_amount || 0)) }</Badge>
           )}
         </>
     ),

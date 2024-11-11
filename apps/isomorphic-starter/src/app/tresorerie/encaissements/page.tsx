@@ -11,6 +11,7 @@ import { Loader } from 'rizzui';
 import NewOperationModal from '@/components/modals/newOperation';
 import HistoryOperationModal from '@/components/modals/historyOperation';
 import { historiqueEncaissements } from '@/data/mouvements/encaissements';
+import NewSubOperationModal from '@/components/modals/newSubOperation';
 
 const breadcrumb = [
     {
@@ -35,6 +36,7 @@ export default function EncaissementsPage() {
 
     const [isNewOpen, setNewOpen] = useState<boolean>(false);
     const [isHistoryOpen, setIsHistoryOpen] = useState<boolean>(false);
+    const [newSubOpen, setNewSubOpen] = useState<boolean>(true);
 
     const [customers, setCustomers] = useState<any[]>([]);
     const [services, setServices] = useState<FactureItemService[]>([]);
@@ -46,6 +48,7 @@ export default function EncaissementsPage() {
     const [tvas, setTvas] = useState<any[]>([]);
     const [regime, setRegime] = useState<string>('');
     const [historyData, setHistoryData] = useState<EncaissementHistoryItem[]>(historiqueEncaissements);
+    const [selectedOperation, setSelectedOperation] = useState<any | null>(null);
 
     setTitle('Encaissements');
     setBreadcrumb(breadcrumb);
@@ -81,6 +84,8 @@ export default function EncaissementsPage() {
                 className="w-full rounded-2xl border-none bg-idkel-gray" 
                 datas={items}
                 setNewOpen={setNewOpen}
+                setSubOpen={setNewSubOpen}
+                setSelectedOperation={setSelectedOperation}
                 refreshData={refreshData}
 
                 openHistory={isHistoryOpen}
@@ -114,6 +119,17 @@ export default function EncaissementsPage() {
                 loading={isHistoryLoading}
                 setLoading={setIsHistoryLoading}
                 historyData={historyData}
+            />
+
+            <NewSubOperationModal
+                isOpen={newSubOpen} 
+                setOpen={setNewSubOpen}
+                operation={'encaissement'}
+                title="Encaisser le montant restant"
+                refreshData={refreshData}
+                accounts={subAccounts}
+                selected={selectedOperation}
+                setSelected={setSelectedOperation}
             />
         </div>
     )

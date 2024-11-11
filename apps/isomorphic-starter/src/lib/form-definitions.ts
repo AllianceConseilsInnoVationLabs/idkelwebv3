@@ -81,3 +81,14 @@ export type CreateEncaissementForm =
         message?: string
     }
     | undefined
+
+export type CreateSubOperationForm = 
+    | {
+        errors?: {
+            montant?: string[],
+            checkdate?: string[],
+            compte?: string[],
+        },
+        message?: string
+    }
+    | undefined
